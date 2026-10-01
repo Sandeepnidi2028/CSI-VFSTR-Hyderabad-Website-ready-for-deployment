@@ -20,20 +20,25 @@ export const Navbar: React.FC = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [
-    { name: 'Home', path: '/home', isHighlight: true },
-    { name: 'About Us', path: '/about' ,isHighlight: true},
-    { name: 'Events', path: '/events',isHighlight: true },
-    { name: 'Gallery', path: '/gallery',isHighlight: true  },
-    { name: 'Team', path: '/team',isHighlight: true },
-   
-    { name: 'Magazines', path: '/magazine',isHighlight: true },
-    { name: 'Join Us', path: '/membership' ,isHighlight: true},
+  interface NavLinkItem {
+    name: string;
+    path: string;
+    isBoxed?: boolean;
+    isHighlight?: boolean;
+  }
+
+  const navLinks: NavLinkItem[] = [
+    { name: 'Home', path: '/', isBoxed: true },
+    { name: 'About Us', path: '/about' },
+    { name: 'Events', path: '/events' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Team', path: '/team' },
+    { name: 'Magazines', path: '/magazine' },
+    { name: 'Join Us', path: '/membership' },
   ];
 
   const isActive = (path: string, name: string) => {
     if (name === 'Home') return location.pathname === '/';
-    if (name === 'VJH 2k26' || name === 'SIH 2026') return false;
     return location.pathname.startsWith(path);
   };
 
