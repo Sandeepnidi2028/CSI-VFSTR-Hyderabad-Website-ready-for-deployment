@@ -21,7 +21,7 @@ export const Navbar: React.FC = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/Home', isHighlight: true },
+    { name: 'Home', path: '/', isBoxed: true },
     { name: 'About Us', path: '/about' ,isHighlight: true},
     { name: 'Events', path: '/events',isHighlight: true },
     { name: 'Gallery', path: '/gallery',isHighlight: true  },
