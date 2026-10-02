@@ -99,15 +99,27 @@ export const AdminTeam: React.FC = () => {
     if (!memberForm.name || !memberForm.position) return;
 
     setSubmittingMember(true);
+
+    const cleanSocialUrl = (val: string) => {
+      const trimmed = (val || '').trim();
+      if (!trimmed || ['-', 'na', 'n/a', 'nil', 'none', 'null'].includes(trimmed.toLowerCase())) {
+        return '';
+      }
+      if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+        return `https://${trimmed}`;
+      }
+      return trimmed;
+    };
+
     const formData = new FormData();
-    formData.append('name', memberForm.name);
-    formData.append('position', memberForm.position);
-    formData.append('department', memberForm.department);
-    formData.append('year', memberForm.year);
-    formData.append('email', memberForm.email);
-    formData.append('linkedin', memberForm.linkedin);
-    formData.append('github', memberForm.github);
-    formData.append('phone', memberForm.phone);
+    formData.append('name', memberForm.name.trim());
+    formData.append('position', memberForm.position.trim());
+    formData.append('department', memberForm.department.trim());
+    formData.append('year', memberForm.year.trim());
+    formData.append('email', memberForm.email.trim());
+    formData.append('linkedin', cleanSocialUrl(memberForm.linkedin));
+    formData.append('github', cleanSocialUrl(memberForm.github));
+    formData.append('phone', memberForm.phone.trim());
     if (photoFile) {
       formData.append('photo', photoFile);
     }
@@ -388,7 +400,9 @@ export const AdminTeam: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Department</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Department <span className="text-slate-400 font-normal text-[11px]">(Optional)</span>
+                  </label>
                   <input
                     type="text"
                     value={memberForm.department}
@@ -398,7 +412,9 @@ export const AdminTeam: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Year / Class</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Year / Class <span className="text-slate-400 font-normal text-[11px]">(Optional)</span>
+                  </label>
                   <input
                     type="text"
                     value={memberForm.year}
@@ -411,7 +427,9 @@ export const AdminTeam: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Email</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Email <span className="text-slate-400 font-normal text-[11px]">(Optional)</span>
+                  </label>
                   <input
                     type="email"
                     value={memberForm.email}
@@ -421,7 +439,9 @@ export const AdminTeam: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Phone</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Phone <span className="text-slate-400 font-normal text-[11px]">(Optional)</span>
+                  </label>
                   <input
                     type="tel"
                     value={memberForm.phone}
@@ -434,29 +454,35 @@ export const AdminTeam: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">LinkedIn URL</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    LinkedIn URL <span className="text-slate-400 font-normal text-[11px]">(Not mandatory)</span>
+                  </label>
                   <input
-                    type="url"
+                    type="text"
                     value={memberForm.linkedin}
                     onChange={(e) => setMemberForm({ ...memberForm, linkedin: e.target.value })}
-                    placeholder="https://linkedin.com/in/..."
+                    placeholder="https://linkedin.com/in/... (leave blank if none)"
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">GitHub URL</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    GitHub URL <span className="text-slate-400 font-normal text-[11px]">(Not mandatory)</span>
+                  </label>
                   <input
-                    type="url"
+                    type="text"
                     value={memberForm.github}
                     onChange={(e) => setMemberForm({ ...memberForm, github: e.target.value })}
-                    placeholder="https://github.com/..."
+                    placeholder="https://github.com/... (leave blank if none)"
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Profile Photo</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Profile Photo <span className="text-slate-400 font-normal text-[11px]">(Optional)</span>
+                </label>
                 <input
                   type="file"
                   accept="image/*"
@@ -507,7 +533,7 @@ export const AdminTeam: React.FC = () => {
 
             <div className="space-y-4 pt-4">
               <p className="text-xs text-slate-600 leading-relaxed">
-                Upload your CSI Team spreadsheet (.xlsx, .xls, or .csv). The importer automatically identifies columns for Name, Position, Department, Year, Email, LinkedIn, GitHub, and Photo.
+                Upload your CSI Team spreadsheet (.xlsx, .xls, or .csv). Only <strong className="text-slate-900">Name</strong> and <strong className="text-slate-900">Position</strong> are required. LinkedIn accounts, GitHub, Email, Department, and Photos are completely optional.
               </p>
 
               {/* Drag/Select Box */}

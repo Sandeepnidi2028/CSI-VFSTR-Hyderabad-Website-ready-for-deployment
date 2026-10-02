@@ -69,42 +69,18 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-3 xl:space-x-5">
+          <nav className="hidden lg:flex items-center space-x-2 xl:space-x-3">
             {navLinks.map((link) => {
               const active = isActive(link.path, link.name);
-
-              if (link.isHighlight) {
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    className="px-3.5 py-1 rounded-[4px] border border-sky-400 text-sky-600 hover:bg-sky-50 text-xs xl:text-sm font-medium transition-all"
-                  >
-                    {link.name}
-                  </Link>
-                );
-              }
-
-              if (link.isBoxed && active) {
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    className="px-3.5 py-1 rounded-[4px] border border-slate-900 text-slate-900 text-xs xl:text-sm font-semibold transition-all hover:bg-slate-50"
-                  >
-                    {link.name}
-                  </Link>
-                );
-              }
 
               return (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-1.5 py-1 text-xs xl:text-sm transition-colors ${
+                  className={`px-3.5 py-1 rounded-[4px] border text-xs xl:text-sm transition-all duration-150 ${
                     active
-                      ? 'text-blue-600 font-semibold'
-                      : 'text-slate-700 hover:text-blue-600 font-normal'
+                      ? 'border-slate-900 bg-slate-900 text-white font-semibold shadow-2xs'
+                      : 'border-slate-900 text-slate-900 font-medium hover:bg-slate-900 hover:text-white bg-white'
                   }`}
                 >
                   {link.name}
@@ -128,7 +104,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Dropdown Drawer */}
       {isOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-1 shadow-xl animate-in slide-in-from-top duration-200">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 shadow-xl animate-in slide-in-from-top duration-200">
           <div className="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-2">
             Navigation Menu
           </div>
@@ -138,12 +114,10 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium ${
-                  link.isHighlight
-                    ? 'text-sky-600 bg-sky-50 border border-sky-300'
-                    : active
-                    ? 'text-slate-900 bg-slate-100 font-semibold border border-slate-300'
-                    : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
+                className={`flex items-center justify-between px-3.5 py-2 rounded-[4px] border text-sm transition-all ${
+                  active
+                    ? 'border-slate-900 bg-slate-900 text-white font-semibold shadow-2xs'
+                    : 'border-slate-900 text-slate-900 font-medium hover:bg-slate-50'
                 }`}
               >
                 <span>{link.name}</span>

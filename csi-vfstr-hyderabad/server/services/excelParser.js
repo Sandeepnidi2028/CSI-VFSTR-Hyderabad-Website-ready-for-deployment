@@ -99,12 +99,29 @@ export function parseTeamExcel(filePathOrBuffer) {
       year = '1st Year';
     }
 
-    // Other social fields
-    const email = normalized.email || normalized.emailid || normalized.mail || '';
-    const linkedin = normalized.linkedin || normalized.linkedinurl || normalized.linkedinlink || '';
-    const github = normalized.github || normalized.githuburl || normalized.githublink || '';
-    const photo = normalized.photo || normalized.image || normalized.photourl || normalized.picture || '';
-    const phone = normalized.phone || normalized.contact || normalized.mobile || '';
+    // Helper to sanitize optional fields (turn -, na, nil into empty string)
+    const cleanOptional = (val) => {
+      if (!val) return '';
+      const s = String(val).trim();
+      if (['-', 'na', 'n/a', 'nil', 'none', 'null'].includes(s.toLowerCase())) return '';
+      return s;
+    };
+
+    const cleanSocialUrl = (val) => {
+      const s = cleanOptional(val);
+      if (!s) return '';
+      if (!s.startsWith('http://') && !s.startsWith('https://')) {
+        return `https://${s}`;
+      }
+      return s;
+    };
+
+    // Optional social & contact fields (none are mandatory)
+    const email = cleanOptional(normalized.email || normalized.emailid || normalized.mail);
+    const linkedin = cleanSocialUrl(normalized.linkedin || normalized.linkedinurl || normalized.linkedinlink);
+    const github = cleanSocialUrl(normalized.github || normalized.githuburl || normalized.githublink);
+    const photo = cleanOptional(normalized.photo || normalized.image || normalized.photourl || normalized.picture);
+    const phone = cleanOptional(normalized.phone || normalized.contact || normalized.mobile);
 
     members.push({
       name: cleanName,
