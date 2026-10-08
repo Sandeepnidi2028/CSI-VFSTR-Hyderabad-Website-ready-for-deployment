@@ -52,8 +52,9 @@ export const Team: React.FC = () => {
     if (p.includes('joint treasurer')) return 9;
     if (p.includes('event')) return 10;
     if (p.includes('executive') || p.includes('committee')) return 11;
-    if (p.includes('design') || p.includes('media') || p.includes('pr')) return 12;
-    if (p.includes('volunteer')) return 13;
+    if (p.includes('media coordinator')) return 12;
+    if (p.includes('design') || p.includes('media') || p.includes('pr') || p.includes('outreach')) return 13;
+    if (p.includes('volunteer')) return 14;
     return 20;
   };
 
@@ -88,12 +89,23 @@ export const Team: React.FC = () => {
 
   const mediaTeam = studentMembers.filter((m) => {
     const p = (m.position || '').toLowerCase();
-    return p.includes('design') || p.includes('media') || p.includes('creative') || p.includes('pr');
+    return (
+      p.includes('design') ||
+      p.includes('media') ||
+      p.includes('creative') ||
+      p.includes('pr') ||
+      p.includes('outreach')
+    );
   });
 
   const volunteers = studentMembers.filter((m) => {
     const p = (m.position || '').toLowerCase();
-    return p.includes('volunteer');
+    return (
+      p.includes('volunteer') &&
+      !p.includes('media') &&
+      !p.includes('outreach') &&
+      !p.includes('design')
+    );
   });
 
   const categorizedIds = new Set([
