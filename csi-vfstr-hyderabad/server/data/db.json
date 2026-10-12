@@ -14,10 +14,10 @@
   ],
   "team": [
     {
-      "id": "867fe1c7-5687-4e06-b4ed-9c416370b67d",
-      "_id": "867fe1c7-5687-4e06-b4ed-9c416370b67d",
+      "id": "70031a38-e841-4d9f-b416-7be55c9f7b13",
+      "_id": "70031a38-e841-4d9f-b416-7be55c9f7b13",
       "name": "B.Yashvan Chandra Reddy",
-      "position": "Student Volunteer",
+      "position": "Media Volunteer",
       "department": "ACSE-CS",
       "year": "B.Tech",
       "rollNumber": "",
@@ -26,12 +26,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.867Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.385Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "edc9649a-eb75-406c-8cfa-5f870353e741",
-      "_id": "edc9649a-eb75-406c-8cfa-5f870353e741",
+      "id": "b407c3cd-da18-4b14-a3c8-e10e4922597b",
+      "_id": "b407c3cd-da18-4b14-a3c8-e10e4922597b",
       "name": "Ahmad Fraz",
       "position": "Treasurer",
       "department": "ACSE-CS",
@@ -42,12 +42,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "27e5aa60-162d-417e-b107-d704c9774f70",
-      "_id": "27e5aa60-162d-417e-b107-d704c9774f70",
+      "id": "456b3827-5f04-41f9-994d-695178bd77d4",
+      "_id": "456b3827-5f04-41f9-994d-695178bd77d4",
       "name": "Ujwal singh",
       "position": "President",
       "department": "CSE",
@@ -58,12 +58,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "30e42b4a-7f2e-4190-ae4d-376f41802b78",
-      "_id": "30e42b4a-7f2e-4190-ae4d-376f41802b78",
+      "id": "355d3b69-b21a-4f9d-aa84-afb2e97367a8",
+      "_id": "355d3b69-b21a-4f9d-aa84-afb2e97367a8",
       "name": "Kaduduri Abhiram",
       "position": "Executive Committee",
       "department": "ACSE-CS",
@@ -74,12 +74,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "a36fd869-a85a-40ab-9c9d-6f8f09724476",
-      "_id": "a36fd869-a85a-40ab-9c9d-6f8f09724476",
+      "id": "e7431ee0-04cc-4292-ac70-4382755691f1",
+      "_id": "e7431ee0-04cc-4292-ac70-4382755691f1",
       "name": "N.sandeep",
       "position": "Media Coordinator",
       "department": "CSE",
@@ -90,12 +90,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "001be3d4-470c-4686-b26e-687e1f7564ad",
-      "_id": "001be3d4-470c-4686-b26e-687e1f7564ad",
+      "id": "14a161fb-e277-4aa0-8e96-1b0a82925d95",
+      "_id": "14a161fb-e277-4aa0-8e96-1b0a82925d95",
       "name": "R Ashwik",
       "position": "Executive Committee",
       "department": "AIML",
@@ -106,12 +106,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "6ea7eda9-b33c-4a1a-b383-8408e1d0abba",
-      "_id": "6ea7eda9-b33c-4a1a-b383-8408e1d0abba",
+      "id": "4399ec79-6620-4341-880a-fba7ee2c809c",
+      "_id": "4399ec79-6620-4341-880a-fba7ee2c809c",
       "name": "T.Deepak chand",
       "position": "Joint Secretary",
       "department": "CSE",
@@ -122,12 +122,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "feb31305-f1bb-4f5d-80eb-df9aae2ddfa9",
-      "_id": "feb31305-f1bb-4f5d-80eb-df9aae2ddfa9",
+      "id": "537186f4-9305-4d7a-b91e-213debb816e5",
+      "_id": "537186f4-9305-4d7a-b91e-213debb816e5",
       "name": "Dhanvi Malpani",
       "position": "Vice President",
       "department": "CSE",
@@ -138,12 +138,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.874Z",
-      "updatedAt": "2026-10-08T07:08:25.874Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "d8bba829-ee10-4ff3-ae0f-9000b9f537b5",
-      "_id": "d8bba829-ee10-4ff3-ae0f-9000b9f537b5",
+      "id": "8213a98d-454c-404d-a46b-1daa2bc2ef62",
+      "_id": "8213a98d-454c-404d-a46b-1daa2bc2ef62",
       "name": "B.Srikar",
       "position": "Executive Committee",
       "department": "AIML",
@@ -154,12 +154,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "90391f00-5996-42ee-b012-f5014a3bc75c",
-      "_id": "90391f00-5996-42ee-b012-f5014a3bc75c",
+      "id": "39005add-facd-4ba2-b318-6cedece81167",
+      "_id": "39005add-facd-4ba2-b318-6cedece81167",
       "name": "G.Vishnu",
       "position": "Secretary",
       "department": "CSE",
@@ -170,12 +170,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "a471808f-7585-4479-8aa6-e36ee2beb69b",
-      "_id": "a471808f-7585-4479-8aa6-e36ee2beb69b",
+      "id": "379d9ad1-d009-4bf4-b74e-2f41997074e3",
+      "_id": "379d9ad1-d009-4bf4-b74e-2f41997074e3",
       "name": "D.Siri Vennela",
       "position": "Executive Committee",
       "department": "AIML",
@@ -186,12 +186,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "79ad82db-675c-402e-816c-e314d04d6ccd",
-      "_id": "79ad82db-675c-402e-816c-e314d04d6ccd",
+      "id": "ea8fcfcf-de67-4997-b56f-c9405f644e3d",
+      "_id": "ea8fcfcf-de67-4997-b56f-c9405f644e3d",
       "name": "Rupika Singh",
       "position": "Event Coordinator",
       "department": "CSE",
@@ -202,12 +202,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "cf39451f-5881-448f-b2bd-5acfc4efde60",
-      "_id": "cf39451f-5881-448f-b2bd-5acfc4efde60",
+      "id": "1837d402-529b-47ce-8fcd-af2ffd1c736c",
+      "_id": "1837d402-529b-47ce-8fcd-af2ffd1c736c",
       "name": "K. Ekshith",
       "position": "Event Coordinator",
       "department": "CSE",
@@ -218,12 +218,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "8608789b-adec-4a2f-bce5-5d8d0c40799b",
-      "_id": "8608789b-adec-4a2f-bce5-5d8d0c40799b",
+      "id": "d15d0223-5e4d-4a43-822f-6691cec60712",
+      "_id": "d15d0223-5e4d-4a43-822f-6691cec60712",
       "name": "k.venkateswarareddy",
       "position": "Event Coordinator",
       "department": "csecs",
@@ -234,12 +234,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "2038e5d8-03c7-4d26-8974-058f7bd0370c",
-      "_id": "2038e5d8-03c7-4d26-8974-058f7bd0370c",
+      "id": "87d824c7-ccbf-4c4b-9dd1-2706c93ad1dd",
+      "_id": "87d824c7-ccbf-4c4b-9dd1-2706c93ad1dd",
       "name": "Panduri Sai Teja",
       "position": "Media & Outreach Volunteer",
       "department": "CSE",
@@ -250,12 +250,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "ce789b1a-d38d-4d8c-9645-57aa67fa2b66",
-      "_id": "ce789b1a-d38d-4d8c-9645-57aa67fa2b66",
+      "id": "a480f1dc-fd60-48f1-bc37-5b4e59da0223",
+      "_id": "a480f1dc-fd60-48f1-bc37-5b4e59da0223",
       "name": "Saivendar Challa",
       "position": "Media & Outreach Volunteer",
       "department": "CSE",
@@ -266,12 +266,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "010183ca-0f0e-4033-9a2c-f62d60881c2e",
-      "_id": "010183ca-0f0e-4033-9a2c-f62d60881c2e",
+      "id": "65bb7e2b-0a6d-4da2-be29-68b839e78012",
+      "_id": "65bb7e2b-0a6d-4da2-be29-68b839e78012",
       "name": "Madala Rama Lakshmi",
       "position": "Executive Committee",
       "department": "AIML",
@@ -282,12 +282,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "9ae6774c-dac1-440a-a497-7455a3bc0521",
-      "_id": "9ae6774c-dac1-440a-a497-7455a3bc0521",
+      "id": "99f5fdfd-13a6-4740-b456-eda1c89da36b",
+      "_id": "99f5fdfd-13a6-4740-b456-eda1c89da36b",
       "name": "T .SRISHWAKSHA",
       "position": "Media & Outreach Volunteer",
       "department": "CSE",
@@ -298,12 +298,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "fa1fec9d-2ecd-43a6-895f-da15447905bc",
-      "_id": "fa1fec9d-2ecd-43a6-895f-da15447905bc",
+      "id": "720f5451-a64c-4857-8e2a-e1fc71120730",
+      "_id": "720f5451-a64c-4857-8e2a-e1fc71120730",
       "name": "Shiva sai",
       "position": "Student Volunteer",
       "department": "CSE",
@@ -314,12 +314,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "3cab3a2f-d9df-43cc-a0d0-4806a1d77bad",
-      "_id": "3cab3a2f-d9df-43cc-a0d0-4806a1d77bad",
+      "id": "e48f673d-92c9-46e8-840c-a7ee67740cbf",
+      "_id": "e48f673d-92c9-46e8-840c-a7ee67740cbf",
       "name": "Santosh",
       "position": "Student Volunteer",
       "department": "ACSE-CS",
@@ -330,12 +330,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "cf77813e-11e2-4155-a190-7534aeba8377",
-      "_id": "cf77813e-11e2-4155-a190-7534aeba8377",
+      "id": "aef6f599-c56e-43ff-b079-c45846a9ca6b",
+      "_id": "aef6f599-c56e-43ff-b079-c45846a9ca6b",
       "name": "Hemanth",
       "position": "Student Volunteer",
       "department": "CSE",
@@ -346,12 +346,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "2c68bda6-1ca9-417b-a92b-998b14aed648",
-      "_id": "2c68bda6-1ca9-417b-a92b-998b14aed648",
+      "id": "25aaf83c-c65a-499f-9149-f7d36cc3a6e9",
+      "_id": "25aaf83c-c65a-499f-9149-f7d36cc3a6e9",
       "name": "Nishant",
       "position": "Student Volunteer",
       "department": "ACSE-CS",
@@ -362,14 +362,14 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "33d076ca-b2aa-421f-bf3c-410a4975593a",
-      "_id": "33d076ca-b2aa-421f-bf3c-410a4975593a",
+      "id": "0e614d2e-7749-46cb-b0a8-2c2535809ca4",
+      "_id": "0e614d2e-7749-46cb-b0a8-2c2535809ca4",
       "name": "YUVRAJ",
-      "position": "Student Volunteer",
+      "position": "Media Volunteer",
       "department": "CSE",
       "year": "B.Tech",
       "rollNumber": "",
@@ -378,12 +378,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "3f283b06-8030-44ef-a8fb-e779261e9592",
-      "_id": "3f283b06-8030-44ef-a8fb-e779261e9592",
+      "id": "368fea9d-6142-42e6-8968-3c7806502721",
+      "_id": "368fea9d-6142-42e6-8968-3c7806502721",
       "name": "Manohar pvsm",
       "position": "Student Volunteer",
       "department": "AIML",
@@ -394,12 +394,12 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     },
     {
-      "id": "4a664054-dc0b-474b-9fae-192d69303d7e",
-      "_id": "4a664054-dc0b-474b-9fae-192d69303d7e",
+      "id": "611e2222-a84d-40fa-b5ce-9a9af9713dab",
+      "_id": "611e2222-a84d-40fa-b5ce-9a9af9713dab",
       "name": "K .LASYA",
       "position": "Event Coordinator",
       "department": "CSE",
@@ -410,8 +410,8 @@
       "github": "",
       "photo": "",
       "phone": "",
-      "createdAt": "2026-10-08T07:08:25.875Z",
-      "updatedAt": "2026-10-08T07:08:25.875Z"
+      "createdAt": "2026-10-08T07:22:02.389Z",
+      "updatedAt": "2026-10-08T07:22:02.389Z"
     }
   ],
   "events": [],

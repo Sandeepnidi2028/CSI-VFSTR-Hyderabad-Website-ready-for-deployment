@@ -17,7 +17,8 @@ function normalizeRole(role = '') {
   if (r.includes('EVENT COORDINATOR') || r.includes('EVENT MANAGEMENT')) return 'Event Coordinator';
   if (r.includes('EXECUTIVE') || r.includes('EXCUTIVE') || r.includes('COMITEE') || r.includes('COMMITTEE')) return 'Executive Committee';
   if (r.includes('MEDIA') && r.includes('COORDINATOR')) return 'Media Coordinator';
-  if (r.includes('VOLUNTEER') && (r.includes('MEDIA') || r.includes('OUTREACH'))) return 'Media & Outreach Volunteer';
+  if (r.includes('VOLUNTEER') && r.includes('OUTREACH')) return 'Media & Outreach Volunteer';
+  if (r.includes('VOLUNTEER') && r.includes('MEDIA')) return 'Media Volunteer';
   if (r.includes('MEDIA') || r.includes('OUTREACH')) return 'Media & Outreach Team';
   if (r.includes('VOLUNTEER')) return 'Student Volunteer';
   if (r.includes('TECHNICAL') || r.includes('TECH')) return 'Technical Team Lead';
