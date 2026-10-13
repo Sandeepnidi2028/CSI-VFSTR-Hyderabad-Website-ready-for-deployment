@@ -11,6 +11,7 @@ import {
   X,
   Upload
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_PROJECT_IMAGE } from '../../utils/imageUrl';
 
 export const AdminProjects: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -163,7 +164,14 @@ export const AdminProjects: React.FC = () => {
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
                     {proj.image ? (
-                      <img src={proj.image} alt={proj.title} className="w-full h-full object-cover" />
+                      <img
+                        src={getImageUrl(proj.image)}
+                        alt={proj.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = FALLBACK_PROJECT_IMAGE;
+                        }}
+                      />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-navy-900 text-cyan-400 font-bold text-sm">
                         CSI
