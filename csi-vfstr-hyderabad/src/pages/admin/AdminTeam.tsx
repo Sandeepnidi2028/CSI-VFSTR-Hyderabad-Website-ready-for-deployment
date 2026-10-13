@@ -14,6 +14,7 @@ import {
   Search,
   ExternalLink
 } from 'lucide-react';
+import { getImageUrl } from '../../utils/imageUrl';
 
 export const AdminTeam: React.FC = () => {
   const [team, setTeam] = useState<TeamMember[]>([]);
@@ -296,7 +297,16 @@ export const AdminTeam: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
                           {member.photo ? (
-                            <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                            <img
+                              src={getImageUrl(member.photo)}
+                              alt={member.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                  member.name
+                                )}&background=0e1b4d&color=fff&size=100`;
+                              }}
+                            />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center bg-navy-800 text-cyan-400 font-bold text-xs">
                               {member.name.slice(0, 2).toUpperCase()}

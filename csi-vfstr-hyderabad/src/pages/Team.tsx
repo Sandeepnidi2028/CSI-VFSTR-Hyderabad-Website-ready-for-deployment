@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { teamService } from '../services/api';
 import { TeamMember } from '../types';
 import { Users, GraduationCap, Linkedin } from 'lucide-react';
+import { getImageUrl } from '../utils/imageUrl';
 
 export const Team: React.FC = () => {
   const [team, setTeam] = useState<TeamMember[]>([]);
@@ -129,7 +130,7 @@ export const Team: React.FC = () => {
           <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-xl ring-1 ring-slate-200/80 bg-slate-100 flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
             {member.photo ? (
               <img
-                src={member.photo}
+                src={getImageUrl(member.photo)}
                 alt={member.name}
                 className="w-full h-full object-cover"
                 onError={(e) => {

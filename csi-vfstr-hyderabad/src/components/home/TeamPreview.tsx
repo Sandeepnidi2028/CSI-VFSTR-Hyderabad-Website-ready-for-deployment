@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Users, ArrowRight, Linkedin, Github, Mail } from 'lucide-react';
 import { teamService } from '../../services/api';
 import { TeamMember } from '../../types';
+import { getImageUrl } from '../../utils/imageUrl';
 
 export const TeamPreview: React.FC = () => {
   const [team, setTeam] = useState<TeamMember[]>([]);
@@ -73,9 +74,14 @@ export const TeamPreview: React.FC = () => {
                 <div className="relative w-28 h-28 rounded-2xl overflow-hidden mb-4 bg-slate-100 border border-slate-200">
                   {member.photo ? (
                     <img
-                      src={member.photo}
+                      src={getImageUrl(member.photo)}
                       alt={member.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          member.name
+                        )}&background=0e1b4d&color=fff&size=200`;
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-tr from-navy-800 to-blue-700 text-white font-display font-bold text-2xl">

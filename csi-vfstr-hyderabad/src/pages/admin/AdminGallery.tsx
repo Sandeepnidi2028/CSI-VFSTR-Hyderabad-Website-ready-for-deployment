@@ -11,6 +11,7 @@ import {
   Sparkles,
   Eye
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_EVENT_IMAGE } from '../../utils/imageUrl';
 
 export const AdminGallery: React.FC = () => {
   const [albums, setAlbums] = useState<GalleryAlbum[]>([]);
@@ -182,9 +183,12 @@ export const AdminGallery: React.FC = () => {
                 <div className="relative aspect-video bg-navy-900 overflow-hidden">
                   {album.coverImage ? (
                     <img
-                      src={album.coverImage}
+                      src={getImageUrl(album.coverImage)}
                       alt={album.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs">
@@ -399,7 +403,14 @@ export const AdminGallery: React.FC = () => {
                       key={img.id}
                       className="relative rounded-xl overflow-hidden aspect-square bg-slate-100 group border border-slate-200"
                     >
-                      <img src={img.url} alt={img.title || 'Photo'} className="w-full h-full object-cover" />
+                      <img
+                        src={getImageUrl(img.url)}
+                        alt={img.title || 'Photo'}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                        }}
+                      />
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <button
                           onClick={() => handleDeletePhoto(selectedAlbum.id, img.id)}

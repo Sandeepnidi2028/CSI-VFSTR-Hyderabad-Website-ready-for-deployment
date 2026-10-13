@@ -9,6 +9,7 @@ import {
   Layers,
   Sparkles
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_PROJECT_IMAGE } from '../utils/imageUrl';
 
 export const Projects: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -65,9 +66,12 @@ export const Projects: React.FC = () => {
                 <div className="relative h-48 bg-slate-900 overflow-hidden">
                   {project.image ? (
                     <img
-                      src={project.image}
+                      src={getImageUrl(project.image)}
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = FALLBACK_PROJECT_IMAGE;
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center tech-grid-bg text-slate-500 p-4">
