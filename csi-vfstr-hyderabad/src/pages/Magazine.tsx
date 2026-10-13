@@ -9,6 +9,7 @@ import {
   FileText,
   Sparkles
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_MAGAZINE_IMAGE } from '../utils/imageUrl';
 
 export const Magazine: React.FC = () => {
   const [publications, setPublications] = useState<PublicationItem[]>([]);
