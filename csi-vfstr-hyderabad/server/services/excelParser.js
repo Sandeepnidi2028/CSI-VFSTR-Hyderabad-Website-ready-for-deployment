@@ -13,14 +13,19 @@ function normalizeRole(role = '', isFaculty = false) {
     return isFaculty ? 'Faculty Coordinator' : 'Executive Member';
   }
 
-  // Preserve official faculty designations
-  if (r.includes('HEAD OF THE DEPARTMENT') || r.includes('HOD')) {
+  // Preserve & nicely format official faculty designations
+  if (r.includes('HOD') || r.includes('HEAD OF')) {
+    return 'Head of the Department (CSE & ACSE)';
+  }
+  if (r.includes('NOMINEE')) {
+    return 'CSI Nominee';
+  }
+  if (r.includes('COORDINATOR')) {
+    if (r.includes('ACSE')) return 'Faculty Coordinator (ACSE)';
+    if (r.includes('CSE')) return 'Faculty Coordinator (CSE)';
     return role.trim();
   }
   if (r.includes('FACULTY ADVISOR')) {
-    return role.trim();
-  }
-  if (r.includes('FACULTY COORDINATOR')) {
     return role.trim();
   }
   if (r.includes('FACULTY') || r.includes('PROFESSOR') || r.includes('COUNSELOR') || r.includes('ADVISOR')) {
@@ -121,6 +126,7 @@ export function parseTeamExcel(filePathOrBuffer) {
       normalized.nameofthefaculty ||
       normalized.nameoffaculty ||
       normalized.faculty ||
+      normalized.facultycommittee ||
       normalized.membername ||
       normalized.studentname ||
       normalized.teachername ||
@@ -145,7 +151,7 @@ export function parseTeamExcel(filePathOrBuffer) {
       }
     }
 
-    // Prefix fallback: value starts with Dr. / Prof. / Mr. / Mrs.
+    // Prefix fallback: value starts with Dr. / Prof. / Mr. / Mrs. / Ms.
     if (!rawName) {
       for (const [k, v] of Object.entries(normalized)) {
         if (/^(dr\.|dr\s|prof\.|prof\s|mr\.|mr\s|mrs\.|ms\.)/i.test(v)) {
@@ -156,17 +162,25 @@ export function parseTeamExcel(filePathOrBuffer) {
     }
 
     // If still no name or it's a header word, skip
-    if (!rawName || ['NAME', 'FACULTY', 'FACULTY NAME', 'STUDENT NAME', 'FULL NAME'].includes(rawName.toUpperCase())) {
+    if (!rawName || ['NAME', 'FACULTY', 'FACULTY NAME', 'STUDENT NAME', 'FULL NAME', 'FACULTY COMMITTEE'].includes(rawName.toUpperCase())) {
       continue;
     }
 
-    // Clean (MALE) or (FEMALE) from name if present
-    const cleanName = rawName.replace(/\s*\((male|female)\)\s*/gi, '').trim();
+    // Clean extra spaces around dots e.g. "Dr .K.B Manikandan" -> "Dr. K.B Manikandan"
+    let cleanName = rawName
+      .replace(/Dr\s*\.\s*/gi, 'Dr. ')
+      .replace(/Prof\s*\.\s*/gi, 'Prof. ')
+      .replace(/MS\s*\.\s*/gi, 'Ms. ')
+      .replace(/Mr\s*\.\s*/gi, 'Mr. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    cleanName = cleanName.replace(/\s*\((male|female)\)\s*/gi, '').trim();
 
     // Check if member is a faculty member
     const isFacultyMember =
       isFacultyContext ||
-      /^(dr\.|dr\s|prof\.|prof\s)/i.test(cleanName) ||
+      /^(dr\.|dr\s|prof\.|prof\s|ms\.)/i.test(cleanName) ||
       cleanName.toLowerCase().startsWith('mr. sk');
 
     // 2. Resolve Role / Designation
@@ -188,13 +202,35 @@ export function parseTeamExcel(filePathOrBuffer) {
       normalized.coordinator ||
       '';
 
-    // Fuzzy check for role
+    // Fuzzy check for role in keys
     if (!rawRole) {
       for (const [k, v] of Object.entries(normalized)) {
         if (
           (k.includes('role') || k.includes('pos') || k.includes('desig') || k.includes('post') || k.includes('title')) &&
           v
         ) {
+          rawRole = v;
+          break;
+        }
+      }
+    }
+
+    // Unassigned column check: e.g. row has "__EMPTY" column containing role text like "CSE - Coordinator"
+    if (!rawRole) {
+      for (const [k, v] of Object.entries(normalized)) {
+        if (v && v.toLowerCase() !== rawName.toLowerCase() && !v.includes('@') && !v.startsWith('http')) {
+          if (/coordinator|nominee|hod|head|advisor|counselor|faculty|chair|president|secretary|treasurer|volunteer|lead/i.test(v)) {
+            rawRole = v;
+            break;
+          }
+        }
+      }
+    }
+
+    // 2nd column fallback
+    if (!rawRole) {
+      for (const [k, v] of Object.entries(normalized)) {
+        if (v && v.toLowerCase() !== rawName.toLowerCase() && !v.includes('@') && !v.startsWith('http') && v.length < 60) {
           rawRole = v;
           break;
         }
@@ -234,7 +270,15 @@ export function parseTeamExcel(filePathOrBuffer) {
       }
     }
     if (!department) {
-      department = 'CSE';
+      if (/acse\s*-\s*coordinator/i.test(rawRole) || (/acse/i.test(rawRole) && !/cse\s*&\s*acse/i.test(rawRole))) {
+        department = 'ACSE';
+      } else if (/cse\s*&\s*acse/i.test(rawRole) || /hod/i.test(rawRole)) {
+        department = 'CSE & ACSE';
+      } else if (/cse/i.test(rawRole)) {
+        department = 'CSE';
+      } else {
+        department = 'CSE';
+      }
     }
 
     // 4. Resolve Registration / Roll Number
@@ -259,6 +303,7 @@ export function parseTeamExcel(filePathOrBuffer) {
         isFacultyMember ||
         position.toLowerCase().includes('faculty') ||
         position.toLowerCase().includes('advisor') ||
+        position.toLowerCase().includes('nominee') ||
         position.toLowerCase().includes('hod') ||
         position.toLowerCase().includes('head of')
       ) {

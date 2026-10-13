@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { teamService } from '../services/api';
+import { facultyService, studentsService } from '../services/api';
 import { TeamMember } from '../types';
 import { Users, GraduationCap, Linkedin } from 'lucide-react';
 import { getImageUrl } from '../utils/imageUrl';
 
 export const Team: React.FC = () => {
-  const [team, setTeam] = useState<TeamMember[]>([]);
+  const [facultyMembers, setFacultyMembers] = useState<TeamMember[]>([]);
+  const [studentMembers, setStudentMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'faculty' | 'students'>('students');
+  const [activeTab, setActiveTab] = useState<'faculty' | 'students'>('faculty');
 
   useEffect(() => {
-    teamService
-      .getAll()
-      .then((data) => {
-        setTeam(data);
+    Promise.all([
+      facultyService.getAll().catch(() => []),
+      studentsService.getAll().catch(() => [])
+    ])
+      .then(([facultyData, studentsData]) => {
+        setFacultyMembers(facultyData);
+        setStudentMembers(studentsData);
       })
       .catch((err) => console.error('Failed to load team data:', err))
       .finally(() => setLoading(false));
@@ -25,8 +29,12 @@ export const Team: React.FC = () => {
     const yr = (member.year || '').toLowerCase();
     const name = (member.name || '').toLowerCase();
     return (
+      yr.includes('faculty') ||
       name.startsWith('dr.') ||
-      name.startsWith('mr. sk') ||
+      name.startsWith('prof.') ||
+      name.startsWith('ms. b.swathi') ||
+      name.startsWith('ms. b. swathi') ||
+      pos.includes('nominee') ||
       pos.includes('faculty') ||
       pos.includes('advisor') ||
       pos.includes('counselor') ||
@@ -34,8 +42,7 @@ export const Team: React.FC = () => {
       pos.includes('professor') ||
       pos.includes('head of the department') ||
       pos.includes('hod') ||
-      pos.includes('dean') ||
-      yr.includes('faculty')
+      pos.includes('dean')
     );
   };
 
@@ -43,29 +50,30 @@ export const Team: React.FC = () => {
   const getRolePriority = (position = '') => {
     const p = position.toLowerCase();
     if (p.includes('head of the department') || p.includes('hod')) return 1;
-    if (p.includes('faculty advisor')) return 2;
-    if (p.includes('faculty coordinator')) return 3;
-    if (p.includes('president') && !p.includes('vice')) return 4;
-    if (p.includes('vice president') || p.includes('vice chair')) return 5;
-    if (p.includes('secretary') && !p.includes('joint')) return 6;
-    if (p.includes('joint secretary')) return 7;
-    if (p.includes('treasurer') && !p.includes('joint')) return 8;
-    if (p.includes('joint treasurer')) return 9;
-    if (p.includes('event')) return 10;
-    if (p.includes('executive') || p.includes('committee')) return 11;
-    if (p.includes('media coordinator')) return 12;
-    if (p.includes('design') || p.includes('media') || p.includes('pr') || p.includes('outreach')) return 13;
-    if (p.includes('volunteer')) return 14;
+    if (p.includes('nominee')) return 2;
+    if (p.includes('faculty advisor')) return 3;
+    if (p.includes('faculty coordinator') || p.includes('coordinator')) return 4;
+    if (p.includes('president') && !p.includes('vice')) return 5;
+    if (p.includes('vice president') || p.includes('vice chair')) return 6;
+    if (p.includes('secretary') && !p.includes('joint')) return 7;
+    if (p.includes('joint secretary')) return 8;
+    if (p.includes('treasurer') && !p.includes('joint')) return 9;
+    if (p.includes('joint treasurer')) return 10;
+    if (p.includes('event')) return 11;
+    if (p.includes('executive') || p.includes('committee')) return 12;
+    if (p.includes('media coordinator')) return 13;
+    if (p.includes('design') || p.includes('media') || p.includes('pr') || p.includes('outreach')) return 14;
+    if (p.includes('volunteer')) return 15;
     return 20;
   };
 
-  const facultyMembers = team
-    .filter(isFacultyMember)
-    .sort((a, b) => getRolePriority(a.position) - getRolePriority(b.position));
+  const sortedFaculty = [...facultyMembers].sort(
+    (a, b) => getRolePriority(a.position) - getRolePriority(b.position)
+  );
 
-  const studentMembers = team
-    .filter((m) => !isFacultyMember(m))
-    .sort((a, b) => getRolePriority(a.position) - getRolePriority(b.position));
+  const sortedStudents = [...studentMembers].sort(
+    (a, b) => getRolePriority(a.position) - getRolePriority(b.position)
+  );
 
   // Categorize student committee
   const leadership = studentMembers.filter((m) => {
@@ -238,9 +246,9 @@ export const Team: React.FC = () => {
           <div>
             {/* View 1: Faculty Committee */}
             {activeTab === 'faculty' && (
-              facultyMembers.length > 0 ? (
+              sortedFaculty.length > 0 ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-8 justify-center max-w-6xl mx-auto animate-in fade-in duration-300">
-                  {facultyMembers.map(renderMemberCard)}
+                  {sortedFaculty.map(renderMemberCard)}
                 </div>
               ) : (
                 <div className="text-center py-16 px-4 max-w-md mx-auto animate-in fade-in duration-300">

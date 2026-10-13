@@ -4,6 +4,8 @@ import { settingsService } from '../../services/api';
 import {
   Calendar,
   Users,
+  UserCheck,
+  GraduationCap,
   Images,
   Code2,
   BookOpen,
@@ -29,6 +31,8 @@ export const AdminOverview: React.FC = () => {
   const counts = data?.counts || {
     totalEvents: 0,
     upcomingEvents: 0,
+    totalFaculty: 0,
+    totalStudents: 0,
     totalTeam: 0,
     totalGalleryAlbums: 0,
     totalProjects: 0,
@@ -41,8 +45,9 @@ export const AdminOverview: React.FC = () => {
 
   const statCards = [
     { title: 'Total Events', value: counts.totalEvents, subtitle: `${counts.upcomingEvents} Upcoming`, icon: Calendar, color: 'text-blue-600', bg: 'bg-blue-50', link: '/admin/events' },
-    { title: 'Team Members', value: counts.totalTeam, subtitle: 'Spreadsheet or Manual', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50', link: '/admin/team' },
-    { title: 'Gallery Albums', value: counts.totalGalleryAlbums, subtitle: 'Photo Collections', icon: Images, color: 'text-cyan-600', bg: 'bg-cyan-50', link: '/admin/gallery' },
+    { title: 'Faculty Committee', value: counts.totalFaculty ?? 0, subtitle: 'Advisors & Nominees', icon: UserCheck, color: 'text-indigo-600', bg: 'bg-indigo-50', link: '/admin/faculty' },
+    { title: 'Students Committee', value: counts.totalStudents ?? 0, subtitle: 'Execs & Volunteers', icon: GraduationCap, color: 'text-cyan-600', bg: 'bg-cyan-50', link: '/admin/students' },
+    { title: 'Gallery Albums', value: counts.totalGalleryAlbums, subtitle: 'Photo Collections', icon: Images, color: 'text-sky-600', bg: 'bg-sky-50', link: '/admin/gallery' },
     { title: 'Student Projects', value: counts.totalProjects, subtitle: 'Showcase Roster', icon: Code2, color: 'text-emerald-600', bg: 'bg-emerald-50', link: '/admin/projects' },
     { title: 'Publications', value: counts.totalPublications, subtitle: 'Magazines & PDFs', icon: BookOpen, color: 'text-amber-600', bg: 'bg-amber-50', link: '/admin/magazine' },
     { title: 'Membership Apps', value: counts.totalMemberships, subtitle: `${counts.pendingMemberships} Pending Review`, icon: UserPlus, color: 'text-purple-600', bg: 'bg-purple-50', link: '/admin/memberships' },

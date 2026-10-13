@@ -7,6 +7,8 @@ import {
   Calendar,
   Images,
   Users,
+  GraduationCap,
+  UserCheck,
   Code2,
   BookOpen,
   Bell,
@@ -43,7 +45,8 @@ export const AdminLayout: React.FC = () => {
   const navItems = [
     { name: 'Overview', path: '/admin', icon: LayoutDashboard },
     { name: 'Events', path: '/admin/events', icon: Calendar },
-    { name: 'Team Roster', path: '/admin/team', icon: Users },
+    { name: 'Faculty Committee', path: '/admin/faculty', icon: UserCheck },
+    { name: 'Students Committee', path: '/admin/students', icon: GraduationCap },
     { name: 'Gallery Albums', path: '/admin/gallery', icon: Images },
     { name: 'Projects', path: '/admin/projects', icon: Code2 },
     { name: 'Publications', path: '/admin/magazine', icon: BookOpen },

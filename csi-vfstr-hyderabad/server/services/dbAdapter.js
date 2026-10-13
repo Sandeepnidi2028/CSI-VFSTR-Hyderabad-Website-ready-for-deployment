@@ -16,6 +16,8 @@ if (!fs.existsSync(dataDir)) {
 // Initial state schema
 const initialSchema = {
   admins: [],
+  faculty: [],
+  students: [],
   team: [],
   events: [],
   gallery: [],

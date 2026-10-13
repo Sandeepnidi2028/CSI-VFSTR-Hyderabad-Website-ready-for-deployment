@@ -5,6 +5,8 @@ import { authenticateToken } from '../middleware/auth.js';
 
 import * as authController from '../controllers/authController.js';
 import * as teamController from '../controllers/teamController.js';
+import * as facultyController from '../controllers/facultyController.js';
+import * as studentsController from '../controllers/studentsController.js';
 import * as eventsController from '../controllers/eventsController.js';
 import * as galleryController from '../controllers/galleryController.js';
 import * as projectsController from '../controllers/projectsController.js';
@@ -44,7 +46,23 @@ router.get('/settings', settingsController.getSettings);
 router.put('/settings', authenticateToken, settingsController.updateSettings);
 router.get('/overview', authenticateToken, settingsController.getDashboardOverview);
 
-// --- Team Members ---
+// --- Faculty Database ---
+router.get('/faculty', facultyController.getAllFaculty);
+router.get('/faculty/:id', facultyController.getFacultyMember);
+router.post('/faculty', authenticateToken, upload.single('photo'), facultyController.createFacultyMember);
+router.put('/faculty/:id', authenticateToken, upload.single('photo'), facultyController.updateFacultyMember);
+router.delete('/faculty/:id', authenticateToken, facultyController.deleteFacultyMember);
+router.post('/faculty/import-excel', authenticateToken, upload.single('file'), facultyController.importFacultyExcel);
+
+// --- Students Database ---
+router.get('/students', studentsController.getAllStudents);
+router.get('/students/:id', studentsController.getStudentMember);
+router.post('/students', authenticateToken, upload.single('photo'), studentsController.createStudentMember);
+router.put('/students/:id', authenticateToken, upload.single('photo'), studentsController.updateStudentMember);
+router.delete('/students/:id', authenticateToken, studentsController.deleteStudentMember);
+router.post('/students/import-excel', authenticateToken, upload.single('file'), studentsController.importStudentsExcel);
+
+// --- Team Members (Legacy/Unified) ---
 router.get('/team', teamController.getAllTeam);
 router.get('/team/:id', teamController.getTeamMember);
 router.post('/team', authenticateToken, upload.single('photo'), teamController.createTeamMember);

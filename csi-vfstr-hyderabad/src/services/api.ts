@@ -94,7 +94,79 @@ export const settingsService = {
   }
 };
 
-// --- Team Service ---
+// --- Faculty Service (Dedicated Database) ---
+export const facultyService = {
+  getAll: async () => {
+    const res = await apiClient.get<TeamMember[]>('/faculty');
+    return res.data;
+  },
+  getById: async (id: string) => {
+    const res = await apiClient.get<TeamMember>(`/faculty/${id}`);
+    return res.data;
+  },
+  create: async (formData: FormData) => {
+    const res = await apiClient.post<TeamMember>('/faculty', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  },
+  update: async (id: string, formData: FormData) => {
+    const res = await apiClient.put<TeamMember>(`/faculty/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  },
+  delete: async (id: string) => {
+    const res = await apiClient.delete(`/faculty/${id}`);
+    return res.data;
+  },
+  importExcel: async (file: File, preview = false) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const res = await apiClient.post(`/faculty/import-excel?preview=${preview}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  }
+};
+
+// --- Students Service (Dedicated Database) ---
+export const studentsService = {
+  getAll: async () => {
+    const res = await apiClient.get<TeamMember[]>('/students');
+    return res.data;
+  },
+  getById: async (id: string) => {
+    const res = await apiClient.get<TeamMember>(`/students/${id}`);
+    return res.data;
+  },
+  create: async (formData: FormData) => {
+    const res = await apiClient.post<TeamMember>('/students', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  },
+  update: async (id: string, formData: FormData) => {
+    const res = await apiClient.put<TeamMember>(`/students/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  },
+  delete: async (id: string) => {
+    const res = await apiClient.delete(`/students/${id}`);
+    return res.data;
+  },
+  importExcel: async (file: File, preview = false) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const res = await apiClient.post(`/students/import-excel?preview=${preview}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  }
+};
+
+// --- Team Service (Unified Roster) ---
 export const teamService = {
   getAll: async () => {
     const res = await apiClient.get<TeamMember[]>('/team');

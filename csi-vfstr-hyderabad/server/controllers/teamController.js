@@ -209,23 +209,36 @@ export async function importTeamExcel(req, res) {
       });
     }
 
-    // Direct commit
+    // Direct commit / Upsert into MongoDB
     if (isMongoConnected()) {
       for (const m of parsedMembers) {
         await Team.findOneAndUpdate(
-          { name: m.name, position: m.position },
+          { name: m.name },
           { $set: m },
           { upsert: true, new: true, setDefaultsOnInsert: true }
         );
       }
     }
 
-    const updatedTeam = dbAdapter.replaceMany('team', parsedMembers);
+    // Merge into dbAdapter local storage
+    const currentList = dbAdapter.find('team') || [];
+    for (const m of parsedMembers) {
+      const idx = currentList.findIndex(
+        (existing) => existing.name && existing.name.toLowerCase().trim() === m.name.toLowerCase().trim()
+      );
+      if (idx !== -1) {
+        dbAdapter.findByIdAndUpdate('team', currentList[idx].id || currentList[idx]._id, m);
+      } else {
+        dbAdapter.create('team', m);
+      }
+    }
+
+    const finalTeam = isMongoConnected() ? await Team.find({}).lean() : dbAdapter.find('team');
 
     return res.json({
       message: `Successfully imported ${parsedMembers.length} team members into MongoDB Atlas & database.`,
       count: parsedMembers.length,
-      team: isMongoConnected() ? await Team.find({}).lean() : updatedTeam,
+      team: finalTeam,
     });
   } catch (err) {
     console.error('Excel import error:', err);

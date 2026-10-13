@@ -22,6 +22,8 @@ import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminOverview } from './pages/admin/AdminOverview';
 import { AdminEvents } from './pages/admin/AdminEvents';
 import { AdminTeam } from './pages/admin/AdminTeam';
+import { AdminFaculty } from './pages/admin/AdminFaculty';
+import { AdminStudents } from './pages/admin/AdminStudents';
 import { AdminGallery } from './pages/admin/AdminGallery';
 import { AdminProjects } from './pages/admin/AdminProjects';
 import { AdminMagazine } from './pages/admin/AdminMagazine';
@@ -62,6 +64,8 @@ export const App: React.FC = () => {
         >
           <Route index element={<AdminOverview />} />
           <Route path="events" element={<AdminEvents />} />
+          <Route path="faculty" element={<AdminFaculty />} />
+          <Route path="students" element={<AdminStudents />} />
           <Route path="team" element={<AdminTeam />} />
           <Route path="gallery" element={<AdminGallery />} />
           <Route path="projects" element={<AdminProjects />} />

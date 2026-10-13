@@ -21,7 +21,9 @@ export function updateSettings(req, res) {
 export function getDashboardOverview(req, res) {
   try {
     const events = dbAdapter.find('events');
-    const team = dbAdapter.find('team');
+    const faculty = dbAdapter.find('faculty') || [];
+    const students = dbAdapter.find('students') || [];
+    const team = dbAdapter.find('team') || [];
     const gallery = dbAdapter.find('gallery');
     const projects = dbAdapter.find('projects');
     const publications = dbAdapter.find('publications');
@@ -36,7 +38,9 @@ export function getDashboardOverview(req, res) {
       counts: {
         totalEvents: events.length,
         upcomingEvents,
-        totalTeam: team.length,
+        totalFaculty: faculty.length,
+        totalStudents: students.length,
+        totalTeam: faculty.length + students.length || team.length,
         totalGalleryAlbums: gallery.length,
         totalProjects: projects.length,
         totalPublications: publications.length,
