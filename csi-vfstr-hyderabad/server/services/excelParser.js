@@ -7,8 +7,27 @@ const XLSX = xlsxModule.default || xlsxModule;
 /**
  * Normalizes role text: cleans typos and formats nicely
  */
-function normalizeRole(role = '') {
+function normalizeRole(role = '', isFaculty = false) {
   const r = role.trim().toUpperCase();
+  if (!r) {
+    return isFaculty ? 'Faculty Coordinator' : 'Executive Member';
+  }
+
+  // Preserve official faculty designations
+  if (r.includes('HEAD OF THE DEPARTMENT') || r.includes('HOD')) {
+    return role.trim();
+  }
+  if (r.includes('FACULTY ADVISOR')) {
+    return role.trim();
+  }
+  if (r.includes('FACULTY COORDINATOR')) {
+    return role.trim();
+  }
+  if (r.includes('FACULTY') || r.includes('PROFESSOR') || r.includes('COUNSELOR') || r.includes('ADVISOR')) {
+    return role.trim();
+  }
+
+  // Student leadership & committee roles
   if (r.includes('VICE PRESIDENT') || r.includes('VICE CHAIR')) return 'Vice President';
   if (r.includes('PRESIDENT') || r.includes('CHAIRPERSON')) return 'President';
   if (r.includes('JOINT SECRETARY')) return 'Joint Secretary';
@@ -23,14 +42,13 @@ function normalizeRole(role = '') {
   if (r.includes('VOLUNTEER')) return 'Student Volunteer';
   if (r.includes('TECHNICAL') || r.includes('TECH')) return 'Technical Team Lead';
   if (r.includes('DESIGN')) return 'Design Team Lead';
-  if (r.includes('FACULTY') || r.includes('COUNSELOR')) return 'Faculty Coordinator';
 
   // Capitalize words
   return role.trim().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 /**
- * Parses an uploaded Excel (.xlsx, .xls) or CSV file containing CSI team members.
+ * Parses an uploaded Excel (.xlsx, .xls) or CSV file containing CSI team/faculty members.
  */
 export function parseTeamExcel(filePathOrBuffer) {
   let workbook;
@@ -48,7 +66,41 @@ export function parseTeamExcel(filePathOrBuffer) {
   }
 
   const worksheet = workbook.Sheets[sheetName];
-  const rawRows = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+
+  // First try parsing standard JSON
+  let rawRows = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+
+  // If default sheet_to_json didn't find standard headers (e.g. title banner in row 1),
+  // inspect 2D array and detect the real header row index.
+  const raw2D = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: '' });
+  if (Array.isArray(raw2D) && raw2D.length > 0) {
+    const headerRowIdx = raw2D.findIndex((row) =>
+      Array.isArray(row) &&
+      row.some((cell) => {
+        const s = String(cell || '').trim().toLowerCase();
+        return (
+          s.includes('name') ||
+          s.includes('faculty') ||
+          s.includes('teacher') ||
+          s.includes('professor') ||
+          s.includes('staff') ||
+          s.includes('designation') ||
+          s.includes('role') ||
+          s.includes('s.no') ||
+          s.includes('sno')
+        );
+      })
+    );
+
+    if (headerRowIdx > 0) {
+      // Re-parse with range starting at the detected header row
+      rawRows = XLSX.utils.sheet_to_json(worksheet, { range: headerRowIdx, defval: '' });
+    }
+  }
+
+  const isFacultyContext =
+    (typeof filePathOrBuffer === 'string' && /faculty/i.test(filePathOrBuffer)) ||
+    sheetName.toLowerCase().includes('faculty');
 
   const members = [];
   let currentGroupRole = '';
@@ -61,47 +113,168 @@ export function parseTeamExcel(filePathOrBuffer) {
       normalized[cleanKey] = typeof value === 'string' ? value.trim() : String(value || '').trim();
     }
 
-    // Resolve Name
-    let rawName = normalized.name || normalized.fullname || normalized.membername || normalized.studentname;
-    if (!rawName || rawName.toUpperCase() === 'NAME') {
-      continue; // Skip header or empty rows
+    // 1. Resolve Name with broad faculty & student patterns
+    let rawName =
+      normalized.name ||
+      normalized.fullname ||
+      normalized.facultyname ||
+      normalized.nameofthefaculty ||
+      normalized.nameoffaculty ||
+      normalized.faculty ||
+      normalized.membername ||
+      normalized.studentname ||
+      normalized.teachername ||
+      normalized.staffname ||
+      normalized.professorname ||
+      normalized.advisorname ||
+      normalized.coordinatorname ||
+      normalized.personname;
+
+    // Fuzzy fallback: check any key containing 'name', 'faculty', 'prof', 'staff', 'teacher'
+    if (!rawName) {
+      for (const [k, v] of Object.entries(normalized)) {
+        if (
+          (k.includes('name') || k.includes('faculty') || k.includes('teacher') || k.includes('staff') || k.includes('prof')) &&
+          !k.includes('file') && !k.includes('photo') && !k.includes('img') && !k.includes('image')
+        ) {
+          if (v && v.toUpperCase() !== 'NAME' && v.toUpperCase() !== 'FACULTY' && v.toUpperCase() !== 'FACULTY NAME') {
+            rawName = v;
+            break;
+          }
+        }
+      }
+    }
+
+    // Prefix fallback: value starts with Dr. / Prof. / Mr. / Mrs.
+    if (!rawName) {
+      for (const [k, v] of Object.entries(normalized)) {
+        if (/^(dr\.|dr\s|prof\.|prof\s|mr\.|mr\s|mrs\.|ms\.)/i.test(v)) {
+          rawName = v;
+          break;
+        }
+      }
+    }
+
+    // If still no name or it's a header word, skip
+    if (!rawName || ['NAME', 'FACULTY', 'FACULTY NAME', 'STUDENT NAME', 'FULL NAME'].includes(rawName.toUpperCase())) {
+      continue;
     }
 
     // Clean (MALE) or (FEMALE) from name if present
     const cleanName = rawName.replace(/\s*\((male|female)\)\s*/gi, '').trim();
 
-    // Resolve Role with merged cell carryover
-    let rawRole = normalized.role || normalized.position || normalized.designation || normalized.post || normalized.title || '';
+    // Check if member is a faculty member
+    const isFacultyMember =
+      isFacultyContext ||
+      /^(dr\.|dr\s|prof\.|prof\s)/i.test(cleanName) ||
+      cleanName.toLowerCase().startsWith('mr. sk');
+
+    // 2. Resolve Role / Designation
+    let rawRole =
+      normalized.role ||
+      normalized.position ||
+      normalized.designation ||
+      normalized.designationrole ||
+      normalized.positionrole ||
+      normalized.post ||
+      normalized.title ||
+      normalized.facultyrole ||
+      normalized.committeerole ||
+      normalized.roleincsi ||
+      normalized.csirole ||
+      normalized.responsibility ||
+      normalized.portfolio ||
+      normalized.advisor ||
+      normalized.coordinator ||
+      '';
+
+    // Fuzzy check for role
+    if (!rawRole) {
+      for (const [k, v] of Object.entries(normalized)) {
+        if (
+          (k.includes('role') || k.includes('pos') || k.includes('desig') || k.includes('post') || k.includes('title')) &&
+          v
+        ) {
+          rawRole = v;
+          break;
+        }
+      }
+    }
 
     if (rawRole) {
       currentGroupRole = rawRole;
     } else if (currentGroupRole) {
-      // Inherit group role from merged cell above (e.g. Event Coordinator, Executive Committee, Outreach, Volunteer)
       const u = currentGroupRole.toUpperCase();
       if (!u.includes('PRESIDENT') && !u.includes('SECRETARY') && !u.includes('TREASURER')) {
         rawRole = currentGroupRole;
       }
     }
 
-    const position = rawRole ? normalizeRole(rawRole) : 'Executive Member';
-
-    // Resolve Department / Class
-    const department = normalized.class || normalized.department || normalized.dept || normalized.branch || '';
-
-    // Resolve Registration / Roll Number
-    const rollNumber = normalized.registrationnumber || normalized.regno || normalized.rollno || normalized.studentid || '';
-
-    // Resolve Year
-    let year = normalized.year || normalized.academicyear || normalized.batch || '';
-    if (!year && rollNumber.startsWith('24')) {
-      year = '2nd Year';
-    } else if (!year && rollNumber.startsWith('23')) {
-      year = '3rd Year';
-    } else if (!year && rollNumber.startsWith('25')) {
-      year = '1st Year';
+    if (!rawRole && isFacultyMember) {
+      rawRole = 'Faculty Coordinator';
     }
 
-    // Helper to sanitize optional fields (turn -, na, nil into empty string)
+    const position = normalizeRole(rawRole, isFacultyMember);
+
+    // 3. Resolve Department / Class
+    let department =
+      normalized.department ||
+      normalized.dept ||
+      normalized.branch ||
+      normalized.class ||
+      normalized.specialization ||
+      '';
+
+    if (!department) {
+      for (const [k, v] of Object.entries(normalized)) {
+        if (k.includes('dept') || k.includes('branch')) {
+          department = v;
+          break;
+        }
+      }
+    }
+    if (!department) {
+      department = 'CSE';
+    }
+
+    // 4. Resolve Registration / Roll Number
+    const rollNumber =
+      normalized.registrationnumber ||
+      normalized.regno ||
+      normalized.rollno ||
+      normalized.studentid ||
+      normalized.empid ||
+      '';
+
+    // 5. Resolve Year / Cadre
+    let year =
+      normalized.year ||
+      normalized.academicyear ||
+      normalized.batch ||
+      normalized.cadre ||
+      '';
+
+    if (!year) {
+      if (
+        isFacultyMember ||
+        position.toLowerCase().includes('faculty') ||
+        position.toLowerCase().includes('advisor') ||
+        position.toLowerCase().includes('hod') ||
+        position.toLowerCase().includes('head of')
+      ) {
+        year = 'Faculty';
+      } else if (rollNumber.startsWith('24')) {
+        year = '2nd Year';
+      } else if (rollNumber.startsWith('23')) {
+        year = '3rd Year';
+      } else if (rollNumber.startsWith('25')) {
+        year = '1st Year';
+      } else {
+        year = 'B.Tech';
+      }
+    }
+
+    // 6. Optional social & contact fields
     const cleanOptional = (val) => {
       if (!val) return '';
       const s = String(val).trim();
@@ -118,18 +291,17 @@ export function parseTeamExcel(filePathOrBuffer) {
       return s;
     };
 
-    // Optional social & contact fields (none are mandatory)
-    const email = cleanOptional(normalized.email || normalized.emailid || normalized.mail);
+    const email = cleanOptional(normalized.email || normalized.emailid || normalized.mail || normalized.officialemail);
     const linkedin = cleanSocialUrl(normalized.linkedin || normalized.linkedinurl || normalized.linkedinlink);
     const github = cleanSocialUrl(normalized.github || normalized.githuburl || normalized.githublink);
-    const photo = cleanOptional(normalized.photo || normalized.image || normalized.photourl || normalized.picture);
-    const phone = cleanOptional(normalized.phone || normalized.contact || normalized.mobile);
+    const photo = cleanOptional(normalized.photo || normalized.image || normalized.photourl || normalized.picture || normalized.profilepic);
+    const phone = cleanOptional(normalized.phone || normalized.contact || normalized.mobile || normalized.phonenumber);
 
     members.push({
       name: cleanName,
       position,
       department: department || 'CSE',
-      year: year || 'B.Tech',
+      year: year || (isFacultyMember ? 'Faculty' : 'B.Tech'),
       rollNumber,
       email,
       linkedin,
