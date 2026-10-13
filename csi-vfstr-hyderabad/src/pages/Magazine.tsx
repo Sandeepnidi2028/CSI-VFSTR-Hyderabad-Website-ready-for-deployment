@@ -66,9 +66,12 @@ export const Magazine: React.FC = () => {
                 <div className="relative h-64 bg-slate-900 overflow-hidden">
                   {pub.coverImage ? (
                     <img
-                      src={pub.coverImage}
+                      src={getImageUrl(pub.coverImage)}
                       alt={pub.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = FALLBACK_MAGAZINE_IMAGE;
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center tech-grid-bg text-slate-400 p-6 text-center">
