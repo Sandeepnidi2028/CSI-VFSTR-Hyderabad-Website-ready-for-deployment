@@ -14,6 +14,7 @@ import {
   Users,
   Image as ImageIcon
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_EVENT_IMAGE } from '../utils/imageUrl';
 
 export const EventDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -73,9 +74,12 @@ export const EventDetail: React.FC = () => {
           <div className="relative h-64 sm:h-96 bg-navy-900 overflow-hidden">
             {event.poster ? (
               <img
-                src={event.poster}
+                src={getImageUrl(event.poster)}
                 alt={event.title}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                }}
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center tech-grid-bg text-slate-400 p-8 text-center">
@@ -225,9 +229,12 @@ export const EventDetail: React.FC = () => {
                   {event.galleryImages.map((img, idx) => (
                     <div key={idx} className="rounded-xl overflow-hidden shadow-sm aspect-video bg-slate-100 border border-slate-200">
                       <img
-                        src={img}
+                        src={getImageUrl(img)}
                         alt={`Event moment ${idx + 1}`}
                         className="w-full h-full object-cover hover:scale-105 transition-transform"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                        }}
                       />
                     </div>
                   ))}

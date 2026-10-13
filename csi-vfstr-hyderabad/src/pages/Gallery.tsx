@@ -11,6 +11,7 @@ import {
   Sparkles,
   Layers
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_EVENT_IMAGE } from '../utils/imageUrl';
 
 export const Gallery: React.FC = () => {
   const [albums, setAlbums] = useState<GalleryAlbum[]>([]);
@@ -155,10 +156,13 @@ export const Gallery: React.FC = () => {
                 className="group relative rounded-2xl overflow-hidden bg-slate-900 shadow-sm hover:shadow-xl transition-all duration-300 aspect-[4/3] cursor-pointer"
               >
                 <img
-                  src={img.url}
+                  src={getImageUrl(img.url)}
                   alt={img.title || 'CSI Gallery Photo'}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                  }}
                 />
 
                 {/* Hover overlay */}
@@ -213,9 +217,12 @@ export const Gallery: React.FC = () => {
           {/* Centered Image View */}
           <div className="max-w-5xl max-h-[85vh] flex flex-col items-center">
             <img
-              src={activeLightboxImage.url}
+              src={getImageUrl(activeLightboxImage.url)}
               alt={activeLightboxImage.title || 'CSI Photo'}
               className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+              }}
             />
             <div className="mt-4 text-center text-white">
               <p className="font-display font-bold text-sm sm:text-base">
