@@ -12,6 +12,7 @@ import {
   Search,
   ExternalLink
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_EVENT_IMAGE } from '../utils/imageUrl';
 
 export const Events: React.FC = () => {
   const [events, setEvents] = useState<EventItem[]>([]);
@@ -167,9 +168,12 @@ export const Events: React.FC = () => {
                 <div className="relative h-52 bg-slate-900 overflow-hidden">
                   {event.poster ? (
                     <img
-                      src={event.poster}
+                      src={getImageUrl(event.poster)}
                       alt={event.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center tech-grid-bg text-slate-500 p-4 text-center">

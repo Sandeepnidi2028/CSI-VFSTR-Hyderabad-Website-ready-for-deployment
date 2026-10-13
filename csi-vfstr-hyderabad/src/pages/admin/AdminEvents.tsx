@@ -14,6 +14,7 @@ import {
   Trophy,
   CheckCircle2
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_EVENT_IMAGE } from '../../utils/imageUrl';
 
 export const AdminEvents: React.FC = () => {
   const [events, setEvents] = useState<EventItem[]>([]);
@@ -213,7 +214,14 @@ export const AdminEvents: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
                           {event.poster ? (
-                            <img src={event.poster} alt={event.title} className="w-full h-full object-cover" />
+                            <img
+                              src={getImageUrl(event.poster)}
+                              alt={event.title}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                              }}
+                            />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white text-xs font-bold">
                               CSI
