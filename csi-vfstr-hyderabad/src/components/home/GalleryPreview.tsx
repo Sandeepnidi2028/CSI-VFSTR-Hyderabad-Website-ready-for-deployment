@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Images, ArrowRight } from 'lucide-react';
 import { galleryService } from '../../services/api';
 import { GalleryAlbum } from '../../types';
+import { getImageUrl, FALLBACK_EVENT_IMAGE } from '../../utils/imageUrl';
 
 export const GalleryPreview: React.FC = () => {
   const [albums, setAlbums] = useState<GalleryAlbum[]>([]);
@@ -54,9 +55,12 @@ export const GalleryPreview: React.FC = () => {
             >
               {album.coverImage ? (
                 <img
-                  src={album.coverImage}
+                  src={getImageUrl(album.coverImage)}
                   alt={album.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-90"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = FALLBACK_EVENT_IMAGE;
+                  }}
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-tr from-navy-900 via-navy-800 to-blue-900" />
