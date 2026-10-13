@@ -414,7 +414,28 @@
       "updatedAt": "2026-10-08T07:22:02.389Z"
     }
   ],
-  "events": [],
+  "events": [
+    {
+      "id": "f676b826-74e6-47d3-b94d-a62efb2d522a",
+      "_id": "f676b826-74e6-47d3-b94d-a62efb2d522a",
+      "title": "INDUSTRY EXPERT TALK ARTIFICIAL INTELLIGENCE Key Topics: RAG • Agent Harnessing",
+      "date": "2026-10-14",
+      "time": "1:30 PM ",
+      "venue": "ROOM NO - 104",
+      "category": "Workshop",
+      "shortDescription": "",
+      "description": "",
+      "registrationLink": "",
+      "status": "Upcoming",
+      "poster": "/uploads/WhatsApp_Image_2026-10-13_at_13_22_51-1791882290691-135829127.jpeg",
+      "galleryImages": [],
+      "speakers": [],
+      "highlights": [],
+      "winners": [],
+      "createdAt": "2026-10-13T09:04:51.306Z",
+      "updatedAt": "2026-10-13T09:04:51.306Z"
+    }
+  ],
   "gallery": [],
   "projects": [],
   "publications": [],
