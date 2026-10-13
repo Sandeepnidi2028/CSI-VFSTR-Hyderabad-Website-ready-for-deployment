@@ -11,6 +11,7 @@ import {
   Calendar,
   Download
 } from 'lucide-react';
+import { getImageUrl, FALLBACK_MAGAZINE_IMAGE } from '../../utils/imageUrl';
 
 export const AdminMagazine: React.FC = () => {
   const [publications, setPublications] = useState<PublicationItem[]>([]);
@@ -134,7 +135,14 @@ export const AdminMagazine: React.FC = () => {
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
                     {pub.coverImage ? (
-                      <img src={pub.coverImage} alt={pub.title} className="w-full h-full object-cover" />
+                      <img
+                        src={getImageUrl(pub.coverImage)}
+                        alt={pub.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = FALLBACK_MAGAZINE_IMAGE;
+                        }}
+                      />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-navy-900 text-cyan-400 font-bold text-xs">
                         PDF
