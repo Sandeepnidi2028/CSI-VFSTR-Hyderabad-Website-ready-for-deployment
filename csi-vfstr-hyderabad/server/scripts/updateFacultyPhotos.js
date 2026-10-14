@@ -14,7 +14,7 @@ async function updatePhotos() {
   await connectDatabase();
 
   const facultyMap = {
-    'Dr. Ch .Raja Ramesh': '/assets/faculty/dr_ch_raja_ramesh.jpg',
+    'Dr. Ch .Raja Ramesh': '/assets/faculty/dr_ch_raja_ramesh.png',
     'Dr. Madhuri Gummineni': '/assets/faculty/dr_madhuri_gummineni.jpg',
     'Ms. B.Swathi': '/assets/faculty/ms_b_swathi.jpg',
     'Dr. K.B Manikandan': '/assets/faculty/dr_kb_manikandan.jpg',

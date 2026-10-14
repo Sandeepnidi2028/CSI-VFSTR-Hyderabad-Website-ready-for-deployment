@@ -25,9 +25,9 @@
       "linkedin": "",
       "phone": "",
       "photo": "/assets/faculty/dr_kb_manikandan.jpg",
-      "position": "Faculty Coordinator (CSE)",
+      "position": "CSE - Coordinator" ,
       "rollNumber": "",
-      "updatedAt": "2026-10-14T06:54:03.636Z",
+      "updatedAt": "2026-10-14T07:10:53.886Z",
       "year": "Faculty"
     },
     {
@@ -44,7 +44,7 @@
       "photo": "/assets/faculty/dr_madhuri_gummineni.jpg",
       "position": "CSI Nominee",
       "rollNumber": "",
-      "updatedAt": "2026-10-14T06:54:03.495Z",
+      "updatedAt": "2026-10-14T07:10:53.479Z",
       "year": "Faculty"
     },
     {
@@ -59,9 +59,9 @@
       "linkedin": "",
       "phone": "",
       "photo": "/assets/faculty/dr_pawan_kumar_chauhan.jpg",
-      "position": "Faculty Coordinator (ACSE)",
+      "position": "ACSE - Coordinator",
       "rollNumber": "",
-      "updatedAt": "2026-10-14T06:54:03.724Z",
+      "updatedAt": "2026-10-14T07:10:53.968Z",
       "year": "Faculty"
     },
     {
@@ -75,10 +75,10 @@
       "github": "",
       "linkedin": "",
       "phone": "",
-      "photo": "/assets/faculty/dr_ch_raja_ramesh.jpg",
-      "position": "Head of the Department (CSE & ACSE)",
+      "photo": "/assets/faculty/dr_ch_raja_ramesh.png",
+      "position": "Head of the Department ",
       "rollNumber": "",
-      "updatedAt": "2026-10-14T06:54:03.405Z",
+      "updatedAt": "2026-10-14T07:10:53.279Z",
       "year": "Faculty"
     },
     {
@@ -87,7 +87,7 @@
       "name": "Ms. B.Swathi",
       "__v": 0,
       "createdAt": "2026-10-13T18:50:38.090Z",
-      "department": "CSE",
+      "department": "ACSE",
       "email": "",
       "github": "",
       "linkedin": "",
@@ -95,7 +95,7 @@
       "photo": "/assets/faculty/ms_b_swathi.jpg",
       "position": "CSI Nominee",
       "rollNumber": "",
-      "updatedAt": "2026-10-14T06:54:03.569Z",
+      "updatedAt": "2026-10-14T07:10:53.686Z",
       "year": "Faculty"
     }
   ],
@@ -941,7 +941,7 @@
       "photo": "/assets/faculty/dr_kb_manikandan.jpg",
       "phone": "",
       "createdAt": "2026-10-13T18:49:59.740Z",
-      "updatedAt": "2026-10-14T06:54:03.639Z"
+      "updatedAt": "2026-10-14T07:10:53.889Z"
     },
     {
       "id": "89614bc2-4259-44b5-b6cf-a11fcf7ded0e",
@@ -957,7 +957,7 @@
       "photo": "/assets/faculty/dr_madhuri_gummineni.jpg",
       "phone": "",
       "createdAt": "2026-10-13T18:49:59.753Z",
-      "updatedAt": "2026-10-14T06:54:03.496Z"
+      "updatedAt": "2026-10-14T07:10:53.482Z"
     },
     {
       "id": "d1a7534d-579a-4ff5-abd3-3613ff2ab1a7",
@@ -973,7 +973,7 @@
       "photo": "/assets/faculty/dr_pawan_kumar_chauhan.jpg",
       "phone": "",
       "createdAt": "2026-10-13T18:49:59.755Z",
-      "updatedAt": "2026-10-14T06:54:03.728Z"
+      "updatedAt": "2026-10-14T07:10:53.970Z"
     },
     {
       "id": "df5505cd-d6c1-4099-ac13-99be00bb9ff6",
@@ -986,10 +986,10 @@
       "email": "",
       "linkedin": "",
       "github": "",
-      "photo": "/assets/faculty/dr_ch_raja_ramesh.jpg",
+      "photo": "/assets/faculty/dr_ch_raja_ramesh.png",
       "phone": "",
       "createdAt": "2026-10-13T18:49:59.756Z",
-      "updatedAt": "2026-10-14T06:54:03.431Z"
+      "updatedAt": "2026-10-14T07:10:53.297Z"
     },
     {
       "id": "823089c8-280a-4f18-a7f2-5aa50f4e1c6d",
@@ -1005,7 +1005,7 @@
       "photo": "/assets/faculty/ms_b_swathi.jpg",
       "phone": "",
       "createdAt": "2026-10-13T18:49:59.756Z",
-      "updatedAt": "2026-10-14T06:54:03.571Z"
+      "updatedAt": "2026-10-14T07:10:53.690Z"
     }
   ],
   "events": [
